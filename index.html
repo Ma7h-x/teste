@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Vitória</title>
+    
+    <!-- Core Identity & Description -->
+    <meta name="name" content="Vitória" />
+    <meta name="short_name" content="Vitória" />
+    <meta name="application-name" content="Vitória" />
+    <meta name="description" content="Aplicativo de estudos e controle acadêmico universitário com acompanhamento de notas, provas, médias, simulador de aprovação, ferramentas práticas e perfil personalizável para todos os cursos." />
+    
+    <!-- Open Graph & Social -->
+    <meta property="og:title" content="Vitória" />
+    <meta property="og:description" content="Aplicativo de estudos e controle acadêmico universitário com acompanhamento de notas, provas, médias, simulador de aprovação, ferramentas práticas e perfil personalizável para todos os cursos." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/screenshot-mobile.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Vitória" />
+    <meta name="twitter:description" content="Aplicativo de estudos e controle acadêmico universitário com acompanhamento de notas, provas, médias, simulador de aprovação, ferramentas práticas e perfil personalizável para todos os cursos." />
+    <meta name="twitter:image" content="/screenshot-mobile.png" />
+    
+    <!-- PWA Web App Manifest links (Standard + Fallback) -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Icons & Apple Touch Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="/icon-512.png" />
+    
+    <!-- Display, Orientation & Colors -->
+    <meta name="theme-color" content="#2563eb" />
+    <meta name="background-color" content="#ffffff" />
+    <meta name="msapplication-TileColor" content="#2563eb" />
+    <meta name="msapplication-navbutton-color" content="#2563eb" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Vitória" />
+    <meta name="orientation" content="portrait" />
+    <meta name="display" content="standalone" />
+    <meta name="start_url" content="/" />
+    
+    <!-- Structured Data (Schema.org WebApplication) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Vitória • Gestor Acadêmico & Estudos",
+      "alternateName": "Vitória",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Android, iOS, Web",
+      "description": "Aplicativo universitário completo para gestão de matérias, provas, notas, cálculo de médias, simulador de aprovação e ferramentas de estudo.",
+      "browserRequirements": "Requires JavaScript. Requires HTML5.",
+      "screenshot": "/screenshot-mobile.png"
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-rose-50/50 text-stone-800 antialiased selection:bg-pink-200 selection:text-pink-900">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

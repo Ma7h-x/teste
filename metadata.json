@@ -1,0 +1,8 @@
+{
+  "name": "Vitória",
+  "description": "Aplicativo de estudos e controle acadêmico universitário com acompanhamento de notas, provas, médias, simulador de aprovação, ferramentas práticas e perfil personalizável para todos os cursos.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
