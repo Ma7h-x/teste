@@ -30,7 +30,6 @@ import { SubjectModal } from './components/SubjectModal';
 import { ExamModal } from './components/ExamModal';
 import { LoveNoteModal } from './components/LoveNoteModal';
 import { ProfileModal } from './components/ProfileModal';
-import { PlayStoreGuideModal } from './components/PlayStoreGuideModal';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<TabType>('home');
@@ -46,7 +45,6 @@ export default function App() {
 
   // Modals state
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
-  const [isPlayStoreGuideOpen, setIsPlayStoreGuideOpen] = useState(false);
 
   const [isSubjectModalOpen, setIsSubjectModalOpen] = useState(false);
   const [subjectToEdit, setSubjectToEdit] = useState<Subject | null>(null);
@@ -195,7 +193,6 @@ export default function App() {
       pendingExamsCount={pendingExamsCount}
       profile={profile}
       onOpenProfile={() => setIsProfileModalOpen(true)}
-      onOpenPlayStoreGuide={() => setIsPlayStoreGuideOpen(true)}
     >
       {activeTab === 'home' && (
         <HomeTab
@@ -215,7 +212,6 @@ export default function App() {
             setActiveTab('subjects');
           }}
           onOpenProfile={() => setIsProfileModalOpen(true)}
-          onOpenPlayStoreGuide={() => setIsPlayStoreGuideOpen(true)}
           onToggleMode={handleToggleMode}
         />
       )}
@@ -265,11 +261,6 @@ export default function App() {
         profile={profile}
         onSaveProfile={handleSaveProfile}
         onSwitchToVitoria={handleSwitchToVitoria}
-      />
-
-      <PlayStoreGuideModal
-        isOpen={isPlayStoreGuideOpen}
-        onClose={() => setIsPlayStoreGuideOpen(false)}
       />
 
       <SubjectModal

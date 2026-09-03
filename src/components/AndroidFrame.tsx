@@ -13,7 +13,6 @@ import {
   Smartphone, 
   Maximize2, 
   User, 
-  Rocket, 
   Wrench
 } from 'lucide-react';
 
@@ -24,7 +23,6 @@ interface AndroidFrameProps {
   pendingExamsCount: number;
   profile: UserProfile;
   onOpenProfile: () => void;
-  onOpenPlayStoreGuide: () => void;
 }
 
 export const AndroidFrame: React.FC<AndroidFrameProps> = ({
@@ -33,8 +31,7 @@ export const AndroidFrame: React.FC<AndroidFrameProps> = ({
   onTabChange,
   pendingExamsCount,
   profile,
-  onOpenProfile,
-  onOpenPlayStoreGuide
+  onOpenProfile
 }) => {
   const [currentTime, setCurrentTime] = useState('');
   const [isDesktopMockup, setIsDesktopMockup] = useState(true);
@@ -67,20 +64,11 @@ export const AndroidFrame: React.FC<AndroidFrameProps> = ({
         <div className="flex items-center gap-2">
           <span className="w-2.5 h-2.5 rounded-full bg-pink-500 animate-pulse" />
           <span className="text-xs font-bold text-stone-700 tracking-wide uppercase">
-            {isVitoriaMode ? 'Vitória • Edição Amor' : 'Vitória • App Acadêmico'}
+            {isVitoriaMode ? 'Vitória • Edição Amor' : 'Gestor Acadêmico'}
           </span>
         </div>
 
         <div className="flex items-center gap-1.5">
-          <button
-            onClick={onOpenPlayStoreGuide}
-            title="Como publicar na Google Play Store"
-            className="flex items-center gap-1 px-2.5 py-1 bg-white/80 hover:bg-white text-stone-800 rounded-full text-xs font-bold shadow-xs transition backdrop-blur-xs border border-stone-200"
-          >
-            <Rocket className="w-3.5 h-3.5 text-blue-600" />
-            <span className="hidden md:inline">Publicar na</span> Play Store
-          </button>
-
           <button
             onClick={() => setIsDesktopMockup(!isDesktopMockup)}
             className="flex items-center gap-1 px-2.5 py-1 bg-white/80 hover:bg-white text-stone-800 rounded-full text-xs font-bold shadow-xs transition backdrop-blur-xs border border-stone-200"

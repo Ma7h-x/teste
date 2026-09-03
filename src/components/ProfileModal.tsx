@@ -414,7 +414,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
             </button>
           ) : (
             <span className="text-[11px] text-stone-400 font-medium">
-              Vitória • Controle Acadêmico
+              Gestor Acadêmico • Controle Universitário
             </span>
           )}
 

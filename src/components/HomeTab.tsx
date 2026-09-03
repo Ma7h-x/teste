@@ -14,7 +14,6 @@ import {
   FlaskConical,
   RefreshCw,
   Plus,
-  Rocket,
   User,
   Calculator,
   Compass,
@@ -34,7 +33,6 @@ interface HomeTabProps {
   onOpenNewNote: () => void;
   onSelectSubject: (subId: string) => void;
   onOpenProfile: () => void;
-  onOpenPlayStoreGuide: () => void;
   onToggleMode: () => void;
 }
 
@@ -50,7 +48,6 @@ export const HomeTab: React.FC<HomeTabProps> = ({
   onOpenNewNote,
   onSelectSubject,
   onOpenProfile,
-  onOpenPlayStoreGuide,
   onToggleMode
 }) => {
   const [activeNoteIndex, setActiveNoteIndex] = useState(0);
@@ -456,14 +453,14 @@ export const HomeTab: React.FC<HomeTabProps> = ({
         </button>
 
         <button
-          onClick={onOpenPlayStoreGuide}
+          onClick={() => onNavigate('hours')}
           className="p-4 rounded-3xl bg-white border border-stone-200 hover:border-stone-300 shadow-xs text-left group transition"
         >
           <div className="w-9 h-9 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center mb-2 group-hover:scale-110 transition">
-            <Rocket className="w-5 h-5" />
+            <Award className="w-5 h-5" />
           </div>
-          <h3 className="text-xs font-bold text-stone-800">Publicar na Play Store</h3>
-          <p className="text-[10px] text-stone-500 mt-0.5">Guia completo para gerar o APK/AAB</p>
+          <h3 className="text-xs font-bold text-stone-800">Horas Complementares</h3>
+          <p className="text-[10px] text-stone-500 mt-0.5">Certificados, cursos e progresso</p>
         </button>
       </div>
     </div>

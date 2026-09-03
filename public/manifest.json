@@ -1,7 +1,7 @@
 {
   "id": "/",
-  "name": "Vitória • Gestor Acadêmico & Estudos",
-  "short_name": "Vitória",
+  "name": "Gestor Acadêmico",
+  "short_name": "Gestor Acadêmico",
   "description": "Aplicativo universitário completo para gestão de matérias, provas, notas, cálculo de médias, simulador de aprovação e ferramentas de estudo.",
   "lang": "pt-BR",
   "dir": "ltr",
@@ -77,10 +77,10 @@
   ],
   "widgets": [
     {
-      "name": "Resumo Acadêmico Vitória",
-      "short_name": "Vitória Widget",
+      "name": "Resumo do Gestor Acadêmico",
+      "short_name": "Gestor Widget",
       "description": "Veja suas médias, provas e notas no desktop",
-      "tag": "vitoria-academic-summary",
+      "tag": "gestor-academic-summary",
       "template": "academic-widget",
       "ms_ac_template": "/widgets/academic.json",
       "data": "/widgets/academic-data.json",

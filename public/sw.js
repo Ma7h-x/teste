@@ -1,5 +1,5 @@
-// Service Worker for Vitória PWA
-const CACHE_NAME = 'vitoria-pwa-cache-v1';
+// Service Worker for Gestor Acadêmico PWA
+const CACHE_NAME = 'gestor-academico-v2';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
