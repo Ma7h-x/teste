@@ -61,6 +61,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- Immediate Service Worker Registration for PWA / PWABuilder / Play Store -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js', { scope: '/' })
+            .then(function(reg) {
+              console.log('PWA Service Worker registered:', reg.scope);
+            })
+            .catch(function(err) {
+              console.log('SW registration notice:', err);
+            });
+        });
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+          navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(function() {});
+        }
+      }
+    </script>
   </head>
   <body class="bg-rose-50/50 text-stone-800 antialiased selection:bg-pink-200 selection:text-pink-900">
     <div id="root"></div>

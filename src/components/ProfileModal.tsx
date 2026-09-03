@@ -12,8 +12,11 @@ import {
   Sparkles, 
   Check, 
   Building,
-  RotateCcw
+  RotateCcw,
+  KeyRound,
+  Lock
 } from 'lucide-react';
+import confetti from 'canvas-confetti';
 
 interface ProfileModalProps {
   isOpen: boolean;
@@ -41,6 +44,11 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
   const [avatarEmoji, setAvatarEmoji] = useState(profile.avatarEmoji);
   const [targetHours, setTargetHours] = useState(profile.targetHours.toString());
 
+  // Secret code state for Vitória
+  const [showSecretUnlock, setShowSecretUnlock] = useState(false);
+  const [secretCode, setSecretCode] = useState('');
+  const [secretFeedback, setSecretFeedback] = useState<string | null>(null);
+
   useEffect(() => {
     if (isOpen) {
       setMode(profile.mode);
@@ -51,6 +59,9 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
       setTheme(profile.theme);
       setAvatarEmoji(profile.avatarEmoji);
       setTargetHours(profile.targetHours.toString());
+      setShowSecretUnlock(false);
+      setSecretCode('');
+      setSecretFeedback(null);
 
       const isKnown = AVAILABLE_COURSES.some(c => c.name.toLowerCase() === profile.course.toLowerCase());
       if (!isKnown && profile.course) {
@@ -86,9 +97,30 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
       setAvatarEmoji('🔬');
       setTargetHours('400');
       setIsCustomCourse(false);
+      confetti({
+        particleCount: 50,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#ec4899', '#f43f5e', '#fda4af']
+      });
     } else {
       if (name === 'Vitória') setName('Estudante');
       if (theme === 'rose') setTheme('blue');
+    }
+  };
+
+  const handleTryUnlockSecret = (e: React.FormEvent) => {
+    e.preventDefault();
+    const cleanCode = secretCode.trim().toLowerCase();
+    if (cleanCode === 'vitoria' || cleanCode === 'amor' || cleanCode === '1234' || cleanCode === 'biomedicina') {
+      handleModeToggle('vitoria');
+      setSecretFeedback('🌸 Modo Especial da Vitória desbloqueado com sucesso!');
+      setTimeout(() => {
+        setShowSecretUnlock(false);
+        setSecretFeedback(null);
+      }, 1800);
+    } else {
+      setSecretFeedback('Código incorreto. Tente novamente.');
     }
   };
 
@@ -124,8 +156,14 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
               {avatarEmoji}
             </div>
             <div>
-              <h2 className="text-sm font-bold text-stone-900">Perfil & Modo do Aplicativo</h2>
-              <p className="text-[11px] text-stone-500">Alterne entre a versão da Vitória e a versão Play Store</p>
+              <h2 className="text-sm font-bold text-stone-900">
+                {mode === 'vitoria' ? 'Perfil Especial da Vitória ❤️' : 'Perfil Universitário'}
+              </h2>
+              <p className="text-[11px] text-stone-500">
+                {mode === 'vitoria' 
+                  ? 'Modo exclusivo com bilhetes de amor do Matheus' 
+                  : 'Personalize seu curso, semestre e preferências'}
+              </p>
             </div>
           </div>
           <button
@@ -138,44 +176,24 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
 
         {/* Modal Form */}
         <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-5 space-y-5">
-          {/* Mode Switcher Selector */}
-          <div>
-            <label className="text-xs font-bold text-stone-700 block mb-2">
-              Escolha a Versão Ativa
-            </label>
-            <div className="grid grid-cols-2 gap-2 p-1 bg-stone-100 rounded-2xl border border-stone-200">
-              <button
-                type="button"
-                onClick={() => handleModeToggle('vitoria')}
-                className={`py-2.5 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 ${
-                  mode === 'vitoria'
-                    ? 'bg-rose-500 text-white shadow-sm'
-                    : 'text-stone-600 hover:text-rose-600'
-                }`}
-              >
-                <Heart className="w-3.5 h-3.5 fill-current" />
-                Edição Vitória ❤️
-              </button>
-
+          {/* Exibição condicional caso a Vitória esteja no modo exclusivo */}
+          {mode === 'vitoria' && (
+            <div className="p-3 bg-rose-50 rounded-2xl border border-rose-200 flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <Heart className="w-4 h-4 text-rose-500 fill-rose-500 shrink-0" />
+                <span className="text-xs font-bold text-rose-900">
+                  Modo Especial Vitória Ativo
+                </span>
+              </div>
               <button
                 type="button"
                 onClick={() => handleModeToggle('student')}
-                className={`py-2.5 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 ${
-                  mode === 'student'
-                    ? 'bg-blue-600 text-white shadow-sm'
-                    : 'text-stone-600 hover:text-blue-600'
-                }`}
+                className="px-2.5 py-1 text-[11px] font-bold rounded-xl bg-white hover:bg-rose-100 text-rose-700 border border-rose-200 transition"
               >
-                <Sparkles className="w-3.5 h-3.5" />
-                Edição Play Store
+                Modo Discreto
               </button>
             </div>
-            <p className="text-[11px] text-stone-500 mt-1.5 px-1">
-              {mode === 'vitoria'
-                ? '🌸 Versão exclusiva com bilhetes de amor do Matheus, tema rosa e foco em Biomedicina.'
-                : '🎓 Versão aberta para a Play Store: frases motivacionais acadêmicas, adaptada para qualquer curso universitário.'}
-            </p>
-          </div>
+          )}
 
           {/* Student Name */}
           <div>
@@ -327,18 +345,78 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
               })}
             </div>
           </div>
+
+          {/* Acesso Especial / PIN para Modo Vitória */}
+          {mode !== 'vitoria' && (
+            <div className="pt-2 border-t border-stone-100">
+              {!showSecretUnlock ? (
+                <button
+                  type="button"
+                  onClick={() => setShowSecretUnlock(true)}
+                  className="text-[11px] font-semibold text-stone-400 hover:text-stone-600 flex items-center gap-1 transition"
+                >
+                  <KeyRound className="w-3 h-3" /> Possui um código de acesso especial?
+                </button>
+              ) : (
+                <div className="p-3 bg-stone-50 rounded-2xl border border-stone-200 space-y-2 animate-fadeIn">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-stone-700 flex items-center gap-1">
+                      <Lock className="w-3.5 h-3.5 text-stone-500" /> Desbloquear Modo Especial
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowSecretUnlock(false);
+                        setSecretFeedback(null);
+                      }}
+                      className="text-[11px] text-stone-400 hover:text-stone-600"
+                    >
+                      Fechar
+                    </button>
+                  </div>
+                  <div className="flex gap-2">
+                    <input
+                      type="password"
+                      value={secretCode}
+                      onChange={e => setSecretCode(e.target.value)}
+                      placeholder="Digite o código secreto..."
+                      className="flex-1 px-3 py-1.5 bg-white border border-stone-300 rounded-xl text-xs focus:ring-2 focus:ring-rose-500 focus:outline-hidden"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleTryUnlockSecret}
+                      className="px-3 py-1.5 bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs rounded-xl shadow-xs transition"
+                    >
+                      Desbloquear
+                    </button>
+                  </div>
+                  {secretFeedback && (
+                    <p className={`text-[11px] font-semibold ${secretFeedback.includes('desbloqueado') ? 'text-rose-600' : 'text-red-500'}`}>
+                      {secretFeedback}
+                    </p>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
         </form>
 
         {/* Modal Actions */}
         <div className="p-4 border-t border-stone-100 bg-stone-50/90 flex items-center justify-between gap-3">
-          <button
-            type="button"
-            onClick={onSwitchToVitoria}
-            className="text-xs font-bold text-rose-600 hover:text-rose-700 flex items-center gap-1 py-2 px-3 rounded-xl hover:bg-rose-50 transition"
-          >
-            <Heart className="w-3.5 h-3.5 fill-rose-600" />
-            Restaurar Vitória
-          </button>
+          {mode === 'vitoria' ? (
+            <button
+              type="button"
+              onClick={() => handleModeToggle('student')}
+              className="text-xs font-bold text-rose-600 hover:text-rose-700 flex items-center gap-1 py-2 px-3 rounded-xl hover:bg-rose-50 transition"
+            >
+              <RotateCcw className="w-3.5 h-3.5" />
+              Modo Discreto
+            </button>
+          ) : (
+            <span className="text-[11px] text-stone-400 font-medium">
+              Vitória • Controle Acadêmico
+            </span>
+          )}
 
           <div className="flex items-center gap-2">
             <button

@@ -95,31 +95,34 @@ export const HomeTab: React.FC<HomeTabProps> = ({
 
   return (
     <div className="space-y-4 pb-24 animate-fadeIn">
-      {/* Mode Switcher Pill Banner */}
-      <div className="bg-white rounded-2xl p-2.5 border border-stone-200 shadow-xs flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span className={`w-2.5 h-2.5 rounded-full ${isVitoriaMode ? 'bg-rose-500 animate-pulse' : 'bg-blue-600'}`} />
-          <span className="text-xs font-bold text-stone-700">
-            {isVitoriaMode ? '🌸 Modo Namorada (Vitória ❤️)' : `🎓 Modo Play Store (${profile.course})`}
-          </span>
-        </div>
+      {/* Banner exclusivo exibido apenas se o modo da Vitória estiver ativado */}
+      {isVitoriaMode && (
+        <div className="bg-rose-50 border border-rose-200 rounded-2xl p-2.5 shadow-xs flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse" />
+            <span className="text-xs font-bold text-rose-900">
+              🌸 Modo Especial Vitória ❤️
+            </span>
+          </div>
 
-        <div className="flex items-center gap-1">
-          <button
-            onClick={onToggleMode}
-            className="px-2.5 py-1 text-[11px] font-bold rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-800 transition"
-          >
-            {isVitoriaMode ? 'Mudar p/ Play Store' : 'Mudar p/ Vitória'}
-          </button>
-          <button
-            onClick={onOpenProfile}
-            title="Editar dados do perfil"
-            className="p-1 rounded-lg text-stone-400 hover:text-stone-700 hover:bg-stone-100 transition"
-          >
-            <User className="w-3.5 h-3.5" />
-          </button>
+          <div className="flex items-center gap-1">
+            <button
+              onClick={onToggleMode}
+              title="Alternar temporariamente para modo discreto de estudos"
+              className="px-2.5 py-1 text-[11px] font-bold rounded-xl bg-white hover:bg-rose-100 text-rose-700 border border-rose-200 transition"
+            >
+              Modo Discreto
+            </button>
+            <button
+              onClick={onOpenProfile}
+              title="Editar dados do perfil"
+              className="p-1 rounded-lg text-rose-400 hover:text-rose-700 hover:bg-rose-100 transition"
+            >
+              <User className="w-3.5 h-3.5" />
+            </button>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Welcome Banner */}
       <div className={`relative overflow-hidden rounded-3xl bg-gradient-to-br ${themeConfig.cardBanner} p-5 text-white shadow-lg shadow-stone-900/10`}>

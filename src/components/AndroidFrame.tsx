@@ -67,7 +67,7 @@ export const AndroidFrame: React.FC<AndroidFrameProps> = ({
         <div className="flex items-center gap-2">
           <span className="w-2.5 h-2.5 rounded-full bg-pink-500 animate-pulse" />
           <span className="text-xs font-bold text-stone-700 tracking-wide uppercase">
-            {isVitoriaMode ? 'Vitória • Edição Amor' : 'UniFoco • Edição Play Store'}
+            {isVitoriaMode ? 'Vitória • Edição Amor' : 'Vitória • App Acadêmico'}
           </span>
         </div>
 

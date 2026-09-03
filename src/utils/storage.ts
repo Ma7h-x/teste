@@ -5,6 +5,7 @@ import {
   INITIAL_LOVE_NOTES, 
   INITIAL_HOURS,
   INITIAL_PROFILE_VITORIA,
+  INITIAL_PROFILE_STUDENT,
   INITIAL_MOTIVATIONAL_QUOTES
 } from '../data/initialData';
 
@@ -19,12 +20,28 @@ const STORAGE_KEYS = {
 
 export function loadProfile(): UserProfile {
   try {
+    // Secret unlock via URL link or hash specifically for Vitória
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const hash = (window.location.hash || '').toLowerCase();
+      if (
+        params.get('modo') === 'vitoria' || 
+        params.get('mode') === 'vitoria' || 
+        params.get('unlock') === 'vitoria' || 
+        hash === '#vitoria'
+      ) {
+        saveProfile(INITIAL_PROFILE_VITORIA);
+        return INITIAL_PROFILE_VITORIA;
+      }
+    }
+
     const data = localStorage.getItem(STORAGE_KEYS.USER_PROFILE);
     if (data) return JSON.parse(data);
   } catch (e) {
     console.error('Failed to read profile from storage', e);
   }
-  return INITIAL_PROFILE_VITORIA;
+  // Default for all public/Play Store users: Student Mode
+  return INITIAL_PROFILE_STUDENT;
 }
 
 export function saveProfile(profile: UserProfile): void {
