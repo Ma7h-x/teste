@@ -54,6 +54,12 @@ export const PlayStoreGuideModal: React.FC<PlayStoreGuideModalProps> = ({
     categories: ["education", "productivity", "utilities"],
     prefer_related_applications: false,
     related_applications: [],
+    edge_side_panel: {
+      preferred_width: 480
+    },
+    note_taking: {
+      new_note_url: "/#notes"
+    },
     launch_handler: {
       client_mode: "focus-existing"
     },
@@ -92,7 +98,14 @@ export const PlayStoreGuideModal: React.FC<PlayStoreGuideModalProps> = ({
         sizes: "1080x1920",
         type: "image/png",
         form_factor: "narrow",
-        label: "Painel acadêmico de estudos, matérias e simuladores"
+        label: "Painel acadêmico de estudos no celular"
+      },
+      {
+        src: "/screenshot-desktop.png",
+        sizes: "1920x1080",
+        type: "image/png",
+        form_factor: "wide",
+        label: "Painel acadêmico de estudos no computador"
       }
     ],
     shortcuts: [
