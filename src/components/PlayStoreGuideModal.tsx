@@ -69,7 +69,8 @@ export const PlayStoreGuideModal: React.FC<PlayStoreGuideModalProps> = ({
       }
     ],
     scope_extensions: [
-      { origin: "https://academico-sigma-six-31.vercel.app" }
+      { origin: "https://academico-sigma-six-31.vercel.app", type: "associated_origin" },
+      { origin: "https://vitoria-estudos.vercel.app", type: "associated_origin" }
     ],
     file_handlers: [
       {
